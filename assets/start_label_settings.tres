@@ -1,0 +1,13 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b52qgvpt3lua"]
+
+[ext_resource type="FontFile" uid="uid://ci1wuwmhog7et" path="res://assets/fonts/hero-speak.ttf" id="1_n4uxq"]
+
+[resource]
+font = ExtResource("1_n4uxq")
+font_size = 148
+font_color = Color(0.528207, 0.0241378, 1.15032e-05, 1)
+outline_size = 4
+outline_color = Color(1, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0.4, 0.4, 0.4, 0.4)
+shadow_offset = Vector2(10, 10)

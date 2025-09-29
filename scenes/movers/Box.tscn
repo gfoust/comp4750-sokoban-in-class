@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck1gjwnfg570f"]
+
+[ext_resource type="Script" uid="uid://j3bdlidsbrp4" path="res://scripts/movers/Box.cs" id="1_ew2ip"]
+[ext_resource type="Texture2D" uid="uid://71yngc4ynd8n" path="res://assets/sprites/sokoban_tilesheet.png" id="1_qv0h3"]
+
+[node name="Box" type="Node2D" groups=["pushable"]]
+script = ExtResource("1_ew2ip")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = ExtResource("1_qv0h3")
+hframes = 6
+vframes = 6
+frame = 30
+
+[node name="Checkmark" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(32, 32)
+texture = ExtResource("1_qv0h3")
+hframes = 6
+vframes = 6
+frame = 29

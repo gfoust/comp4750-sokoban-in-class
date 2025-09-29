@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://0agi3pik5wuw"]
+
+[ext_resource type="Script" uid="uid://bmobcpxlpag1a" path="res://scripts/levels/LevelBase.cs" id="1_elnrp"]
+[ext_resource type="Texture2D" uid="uid://71yngc4ynd8n" path="res://assets/sprites/sokoban_tilesheet.png" id="1_jbbad"]
+[ext_resource type="PackedScene" uid="uid://blxhskytm8373" path="res://scenes/movers/Player.tscn" id="2_vbmu2"]
+[ext_resource type="AudioStream" uid="uid://dmpemcryca85c" path="res://assets/audio/match.wav" id="4_dr2ln"]
+[ext_resource type="PackedScene" uid="uid://dp5x3uon06vx2" path="res://scenes/WinScreen.tscn" id="5_e7klb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vbmu2"]
+texture = ExtResource("1_jbbad")
+texture_region_size = Vector2i(64, 64)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_elnrp"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_vbmu2")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dr2ln"]
+texture = ExtResource("1_jbbad")
+texture_region_size = Vector2i(64, 64)
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_e7klb"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_dr2ln")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_elnrp"]
+texture = ExtResource("1_jbbad")
+texture_region_size = Vector2i(64, 64)
+0:4/0 = 0
+0:4/0/custom_data_0 = "brown"
+1:4/0 = 0
+1:4/0/custom_data_0 = "red"
+2:4/0 = 0
+2:4/0/custom_data_0 = "blue"
+3:4/0 = 0
+3:4/0/custom_data_0 = "green"
+4:4/0 = 0
+4:4/0/custom_data_0 = "gray"
+
+[sub_resource type="TileSet" id="TileSet_dr2ln"]
+tile_size = Vector2i(64, 64)
+custom_data_layer_0/name = "shade_name"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_elnrp")
+
+[node name="LevelBase" type="Node2D"]
+script = ExtResource("1_elnrp")
+
+[node name="Floor" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_elnrp")
+
+[node name="Walls" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_e7klb")
+
+[node name="Targets" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_dr2ln")
+
+[node name="Player" parent="." instance=ExtResource("2_vbmu2")]
+
+[node name="Boxes" type="Node2D" parent="."]
+
+[node name="MatchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dr2ln")
+
+[node name="WinScreen" parent="." instance=ExtResource("5_e7klb")]
+
+[connection signal="MoveFinished" from="Player" to="." method="OnMoverMoveFinished"]
+[connection signal="WinFinish" from="WinScreen" to="." method="GoToNextScene"]

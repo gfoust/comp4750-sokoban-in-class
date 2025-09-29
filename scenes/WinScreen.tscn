@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://dp5x3uon06vx2"]
+
+[ext_resource type="Script" uid="uid://kdlcueklrb0e" path="res://scripts/WinScreen.cs" id="1_okh34"]
+[ext_resource type="FontFile" uid="uid://ci1wuwmhog7et" path="res://assets/fonts/hero-speak.ttf" id="1_ulig0"]
+[ext_resource type="AudioStream" uid="uid://be7fhainfvjh6" path="res://assets/audio/success.wav" id="3_q8i45"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_okh34"]
+font = ExtResource("1_ulig0")
+font_size = 192
+font_color = Color(0.392974, 0.70187, 0, 1)
+outline_size = 12
+
+[sub_resource type="Gradient" id="Gradient_ulig0"]
+offsets = PackedFloat32Array(0, 0.167, 0.333, 0.5, 0.667, 0.833, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_okh34"]
+gradient = SubResource("Gradient_ulig0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q8i45"]
+particle_flag_disable_z = true
+direction = Vector3(-1, -10, 0)
+spread = 20.0
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 490, 0)
+scale_min = 6.0
+scale_max = 12.0
+color_initial_ramp = SubResource("GradientTexture1D_okh34")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ulig0"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(-1, 1, 1)
+direction = Vector3(1, -10, 0)
+spread = 20.0
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 490, 0)
+scale_min = 6.0
+scale_max = 12.0
+color_initial_ramp = SubResource("GradientTexture1D_okh34")
+
+[node name="WinScreen" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_okh34")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -103.0
+offset_right = 315.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Win!"
+label_settings = SubResource("LabelSettings_okh34")
+
+[node name="LeftParticles" type="GPUParticles2D" parent="."]
+position = Vector2(240, 240)
+emitting = false
+amount = 60
+lifetime = 2.5
+one_shot = true
+explosiveness = 0.95
+process_material = SubResource("ParticleProcessMaterial_q8i45")
+
+[node name="RightParticles" type="GPUParticles2D" parent="."]
+position = Vector2(888, 240)
+emitting = false
+amount = 60
+lifetime = 2.5
+one_shot = true
+explosiveness = 0.95
+process_material = SubResource("ParticleProcessMaterial_ulig0")
+
+[node name="WinMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_q8i45")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

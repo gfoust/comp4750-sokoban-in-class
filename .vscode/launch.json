@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+        {
+            "name": "Play",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${config:godotTools.editorPath.godot4}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+        }
+  ]
+}
